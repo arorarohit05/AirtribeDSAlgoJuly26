@@ -218,11 +218,55 @@ public class LinkedListImpl {
         }
 
         return false;
-
-
-
-
     }
+
+    // D
+    // -1 -> 1 -> 2 -> 3  -> 4 ->5 ->6 ->8
+    //                               c
+
+    //
+    //  1-3->5->null
+    //           l1
+
+    // 2->4->6->8->10->null
+    //       l2
+
+    // 10 ->12
+    //      c
+
+    // 12        15
+    // l1        l2
+
+    // returning head of merged sorted list
+    public static Node mergeTwoLists(Node l1, Node l2){
+        Node dummyNode = new Node(-1);
+        Node current = dummyNode;
+
+        while(l1 != null && l2 != null) {
+            if(l1.data <= l2.data){
+                current.next = l1;
+                l1 = l1.next;
+            }
+            else{
+                current.next = l2;
+                l2 = l2.next;
+            }
+            current = current.next;
+        }
+
+        // c
+
+        // l1 null or l2 null
+
+        if(l1 == null){
+            current.next = l2;
+        }
+        else {
+            current.next = l1;
+        }
+        return dummyNode.next;
+    }
+
 
     static void main() {
 //        Node node1 = new Node(20); //  [20,null]
@@ -296,6 +340,40 @@ public class LinkedListImpl {
 
 //        60
         // [60 -> 50 -> 40 -> 30 -> 20 -> 100 ]
+
+
+        // 1-3->5->null
+        LinkedListImpl l1 = new LinkedListImpl();
+        l1.addLast(1);
+        l1.addLast(3);
+        l1.addLast(5);
+        l1.printMyList();
+        System.out.println();
+
+
+        LinkedListImpl l2 = new LinkedListImpl();
+        l2.addLast(2);
+        l2.addLast(4);
+        l2.addLast(6);
+        l2.addLast(8);
+        l2.addLast(10);
+        l2.printMyList();
+
+        System.out.println();
+        Node h  = mergeTwoLists(l1.head,l2.head);
+
+        Node ptr = h;
+        System.out.println();
+
+        System.out.print(ptr.data + "->"); //1-> 2->3->4->5->
+        while(ptr.next!=null){
+            ptr = ptr.next;
+            System.out.print(ptr.data + "->");
+        }
+        System.out.print("null");
+
+
+
 
     }
 }
