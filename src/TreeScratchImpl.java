@@ -227,6 +227,22 @@ public class TreeScratchImpl {
     // 1
     //2 3
     //45
+
+    //      1
+    //   2     3
+    // 4   5
+
+    public static int maxDepth(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+
+        int lh = maxDepth(root.left);
+        int rh = maxDepth(root.right);
+
+        return 1+Math.max(lh,rh);
+    }
+
     static void main() {
         TreeNode root = new TreeNode(1);
 
@@ -255,6 +271,9 @@ public class TreeScratchImpl {
         System.out.println();
 
         rightSideView(root);
+        System.out.println();
+
+        System.out.println(maxDepth(root));
 
 
     }
